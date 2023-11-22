@@ -1,0 +1,19 @@
+// app/providers.tsx
+"use client";
+
+import { store } from "@/redux/store";
+import { NextUIProvider } from "@nextui-org/react";
+import { SessionProvider } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { Provider } from "react-redux";
+export function Providers({ children }: { children: React.ReactNode }) {
+  const route = useRouter();
+
+  return (
+    <Provider store={store}>
+      <SessionProvider>
+        <NextUIProvider navigate={route.push}>{children}</NextUIProvider>
+      </SessionProvider>
+    </Provider>
+  );
+}
