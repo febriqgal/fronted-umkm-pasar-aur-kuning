@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { Order } from "@/app/(main)/riwayat/types/order";
-import { appConfig, formatRupiah } from "@/constant/appConfig";
-import { useGetByidOrdersApiQuery } from "@/redux/feature/ordersSlice";
+import { appConfig, formatRupiah } from "@/app/_constant/appConfig";
+import { useGetByidOrdersApiQuery } from "@/app/_redux/feature/ordersSlice";
+import { Order } from "@/app/_types/order";
+
 import {
   Button,
   Dropdown,

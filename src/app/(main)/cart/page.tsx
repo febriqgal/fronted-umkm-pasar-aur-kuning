@@ -1,12 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { appConfig, formatRupiah } from "@/constant/appConfig";
 
-import {
-  useDeleteCartsMutation,
-  useGetByUserIdCartsApiQuery,
-  useGetByidCartsApiQuery,
-} from "@/redux/feature/cartsSlice";
 import {
   Button,
   Checkbox,
@@ -19,13 +13,18 @@ import {
 import { useSession } from "next-auth/react";
 import React, { SyntheticEvent, use, useState } from "react";
 import StickyBox from "react-sticky-box";
-import { Carts } from "./types/cart";
-import { useGetUserByIdApiQuery } from "@/redux/feature/usersSlice";
-import { usePostOrdersMutation } from "@/redux/feature/ordersSlice";
+import { Carts } from "../../_types/cart";
 import axios from "axios";
 import toast from "react-hot-toast";
-import ModalEditProfile from "./components/modalEditProfile";
+import ModalEditProfile from "../../_components/M/modalEditProfile";
 import Link from "next/link";
+import { useGetUserByIdApiQuery } from "@/app/_redux/feature/usersSlice";
+import { appConfig, formatRupiah } from "@/app/_constant/appConfig";
+import {
+  useDeleteCartsMutation,
+  useGetByUserIdCartsApiQuery,
+  useGetByidCartsApiQuery,
+} from "@/app/_redux/feature/cartsSlice";
 
 export default function CartPage() {
   const dataOngkir = [
@@ -199,7 +198,7 @@ export default function CartPage() {
               </Select>
 
               <h1>{dataUsers?.data?.address}</h1>
-              <Button as={Link} href="/user">
+              <Button as={Link} href="/user/kelola-akun">
                 Edit Alamat
               </Button>
               <div className="w-full">

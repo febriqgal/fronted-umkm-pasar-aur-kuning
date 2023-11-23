@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { appConfig, formatRupiah } from "@/constant/appConfig";
-import { useGetProductsApiQuery } from "@/redux/feature/productsSlice";
 import { Spinner } from "@nextui-org/react";
 import Header from "../../../public/headerr.jpg";
 import Link from "next/link";
 import Image from "next/image";
+import { useGetProductsApiQuery } from "../_redux/feature/productsSlice";
+import { formatRupiah } from "../_constant/appConfig";
 export default function Home() {
   const { data: dataProduct, isLoading } = useGetProductsApiQuery("products", {
     refetchOnMountOrArgChange: true,

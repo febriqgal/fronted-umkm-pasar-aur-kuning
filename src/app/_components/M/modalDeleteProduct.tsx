@@ -1,5 +1,5 @@
-import { useDeleteProductsMutation } from "@/redux/feature/productsSlice";
-import { Product } from "@/types/products";
+import { useDeleteProductsMutation } from "@/app/_redux/feature/productsSlice";
+import { Product } from "@/app/_types/products";
 import {
   Button,
   Modal,

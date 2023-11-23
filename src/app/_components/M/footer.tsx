@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { appConfig } from "@/constant/appConfig";
 import Image from "next/image";
 import React from "react";
 import Logo from "../../../../public/logo-color.png";
+import { appConfig } from "@/app/_constant/appConfig";
 export default function FooterComponent() {
   return (
     <footer className="bg-gray-200 rounded-t-3xl border-t-1">

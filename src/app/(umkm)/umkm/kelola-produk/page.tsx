@@ -1,6 +1,7 @@
 "use client";
-import { useGetByUserIdProductsApiQuery } from "@/redux/feature/productsSlice";
-import { Product } from "@/types/products";
+
+import { useGetByUserIdProductsApiQuery } from "@/app/_redux/feature/productsSlice";
+import { Product } from "@/app/_types/products";
 import {
   Button,
   Table,
@@ -12,10 +13,8 @@ import {
 } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import React from "react";
-import ModalEditProduct from "../../_components/modal/editProduct";
-import ModalDeleteProduct from "../../_components/modal/deleteProduct";
-import ModalAddProduct from "../../_components/modal/addProduct";
+import ModalDeleteProduct from "../../../_components/M/modalDeleteProduct";
+import ModalEditProduct from "../../../_components/M/modalEditProduct";
 
 export default function KelolaProdukPage() {
   const { data: session } = useSession();

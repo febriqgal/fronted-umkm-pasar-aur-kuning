@@ -1,11 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { appConfig, formatRupiah } from "@/constant/appConfig";
-import {
-  useDeleteOrdersMutation,
-  useGetByidOrdersApiQuery,
-} from "@/redux/feature/ordersSlice";
+
 import {
   Button,
   Table,
@@ -17,13 +13,15 @@ import {
 } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import ModalBayar from "./components/modalBayar";
-import { Order } from "./types/order";
+import ModalBayar from "../../_components/M/modalBayar";
+import { Order } from "../../_types/order";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useGetByidOrdersApiQuery } from "@/app/_redux/feature/ordersSlice";
+import { appConfig, formatRupiah } from "@/app/_constant/appConfig";
 export default function RiwayatPage() {
   dayjs.locale("id");
   dayjs.extend(relativeTime);
@@ -36,7 +34,11 @@ export default function RiwayatPage() {
 
   return (
     <div className="flex  mt-20  min-h-screen">
-      <Table aria-label="Example static collection table">
+      <Table
+        selectionMode="single"
+        color="primary"
+        aria-label="Example static collection table"
+      >
         <TableHeader>
           <TableColumn>No.</TableColumn>
           <TableColumn>NAME</TableColumn>

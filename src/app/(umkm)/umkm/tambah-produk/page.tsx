@@ -1,5 +1,5 @@
 "use client";
-import { usePostProductsMutation } from "@/redux/feature/productsSlice";
+import { usePostProductsMutation } from "@/app/_redux/feature/productsSlice";
 import { Button, Input, Textarea } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
@@ -33,16 +33,9 @@ export interface User {
   updated_at: string;
 }
 export default function TambahProdukPage() {
-  const initialValue = [
-    {
-      type: "paragraph",
-      children: [{ text: "A line of text in a paragraph." }],
-    },
-  ];
   const [loading, setLoading] = React.useState(false);
   const { data: session } = useSession();
   const { register, handleSubmit } = useForm<Root>();
-
   const [newDataProduct] = usePostProductsMutation();
   const [file, setFile] = useState<File>();
 

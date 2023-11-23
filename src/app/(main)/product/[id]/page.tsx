@@ -11,12 +11,12 @@ import {
 } from "@nextui-org/react";
 import { SyntheticEvent, useEffect, useState } from "react";
 
-import { appConfig, formatRupiah } from "@/constant/appConfig";
-import { useGetByidProductsApiQuery } from "@/redux/feature/productsSlice";
 import StickyBox from "react-sticky-box";
 import toast from "react-hot-toast";
-import { usePostCartsMutation } from "@/redux/feature/cartsSlice";
 import { useSession } from "next-auth/react";
+import { useGetByidProductsApiQuery } from "@/app/_redux/feature/productsSlice";
+import { appConfig, formatRupiah } from "@/app/_constant/appConfig";
+import { usePostCartsMutation } from "@/app/_redux/feature/cartsSlice";
 
 export default function ProductPage({ params }: { params: { id: string } }) {
   const { data: sesssion } = useSession();

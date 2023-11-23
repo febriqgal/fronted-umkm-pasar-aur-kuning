@@ -1,9 +1,9 @@
-import { appConfig } from "@/constant/appConfig";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import { Providers } from "../providers";
 import { Toaster } from "react-hot-toast";
+import { appConfig } from "../_constant/appConfig";
 
 const inter = Inter({ subsets: ["latin"] });
 

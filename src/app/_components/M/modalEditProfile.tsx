@@ -10,13 +10,12 @@ import {
   useDisclosure,
   Input,
 } from "@nextui-org/react";
-import { User } from "../types/cart";
-import { useUpdateUsersMutation } from "@/redux/feature/usersSlice";
+import { User } from "../../_types/cart";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import { appConfig } from "@/constant/appConfig";
 import toast from "react-hot-toast";
+import { appConfig } from "@/app/_constant/appConfig";
 
 export default function ModalEditProfile({ dataUsers }: { dataUsers: User }) {
   interface IFormInput {

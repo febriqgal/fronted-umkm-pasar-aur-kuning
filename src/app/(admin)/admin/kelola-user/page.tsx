@@ -1,5 +1,4 @@
 "use client";
-import { appConfig } from "@/constant/appConfig";
 import {
   Table,
   TableBody,
@@ -10,7 +9,8 @@ import {
 } from "@nextui-org/react";
 import axios from "axios";
 import React, { useEffect } from "react";
-import { User } from "../../_types/user";
+import { User } from "../../../_types/user";
+import { appConfig } from "@/app/_constant/appConfig";
 
 export default function KelolaUserPage() {
   const [data, setData] = React.useState([]);

@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-export default function UserPage() {
+export default function KelolaAkunPage() {
   const { data: session } = useSession();
   console.log(session?.user.id);
 

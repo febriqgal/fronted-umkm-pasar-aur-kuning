@@ -1,5 +1,6 @@
 "use client";
-import { appConfig } from "@/constant/appConfig";
+
+import { appConfig } from "@/app/_constant/appConfig";
 import { Button, Input } from "@nextui-org/react";
 import axios from "axios";
 import { useRouter } from "next/navigation";

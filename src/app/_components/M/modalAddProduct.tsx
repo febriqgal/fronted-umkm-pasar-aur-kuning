@@ -1,4 +1,3 @@
-import { useDeleteProductsMutation } from "@/redux/feature/productsSlice";
 import {
   Button,
   Modal,
@@ -10,7 +9,6 @@ import {
 } from "@nextui-org/react";
 
 export default function ModalAddProduct() {
-  const [deleteProduct] = useDeleteProductsMutation();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (

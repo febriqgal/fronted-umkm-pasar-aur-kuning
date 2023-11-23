@@ -1,9 +1,11 @@
 "use client";
+import { usePostUsersMutation } from "@/app/_redux/feature/usersSlice";
 import { Button, Input } from "@nextui-org/react";
-import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 interface IFormInput {
   name: string;
   email: string;
@@ -11,10 +13,7 @@ interface IFormInput {
   address: string;
   phone: string;
 }
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
-import { appConfig } from "@/constant/appConfig";
-import { usePostUsersMutation } from "@/redux/feature/usersSlice";
+
 export default function SignupPage() {
   const route = useRouter();
   const [loading, setLoading] = React.useState(false);

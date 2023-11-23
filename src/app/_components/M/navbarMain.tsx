@@ -15,8 +15,10 @@ import Link from "next/link";
 import { HiShoppingCart } from "react-icons/hi2";
 import Logo from "../../../../public/logo-white.png";
 import { signOut, useSession } from "next-auth/react";
-import { useGetByUserIdCartsApiQuery } from "@/redux/feature/cartsSlice";
-export default function NavbarComponent() {
+import { useGetByUserIdCartsApiQuery } from "@/app/_redux/feature/cartsSlice";
+import TestIcon from "../icons/testIcon";
+
+export default function NavbarMainComponent() {
   const { data: session, status } = useSession();
   const { data: dataProduct } = useGetByUserIdCartsApiQuery(
     `${session?.user?.id}`,
@@ -27,19 +29,25 @@ export default function NavbarComponent() {
   console.log(dataProduct?.data);
 
   return (
-    <div className="flex fixed w-full z-30 justify-between items-center px-20 gap-4 py-4 bg-primary text-white">
+    <div className="flex fixed w-full z-30 justify-between items-center px-20 gap-4 py-4 border-b-2 bg-white text-white">
       <Link href={"/"}>
-        <Image height={50} src={Logo} alt="#" />
+        <div className="flex gap-4 items-center">
+          <TestIcon className="w-10 h-10 fill-primary " />
+          <h1 className="whitespace-nowrap text-primary font-bold">
+            UMKM Pasar Aur Kuning
+          </h1>
+        </div>
       </Link>
       <Input
         size="sm"
+        color="primary"
         startContent={"🔍"}
         placeholder="Semuanya bisa anda cari disini, kecuali jodohmu!"
       />
       <div className="flex gap-4 items-center justify-center">
         <Link href={"/cart"}>
           <Badge size="sm" content={dataProduct?.data?.length} color="primary">
-            <HiShoppingCart className="w-5 h-5" />
+            <HiShoppingCart className="w-5 h-5 fill-primary" />
           </Badge>
         </Link>
         {status === "loading" ? (
@@ -65,7 +73,11 @@ export default function NavbarComponent() {
                   ) : (
                     <DropdownItem
                       as={Link}
-                      href={session.user?.role === "admin" ? "/admin" : "/user"}
+                      href={
+                        session.user?.role === "admin"
+                          ? "/admin/kelola-user"
+                          : "/user/riwayat-pembelian"
+                      }
                     >
                       {session.user?.role === "admin"
                         ? "Dashboard Admin"

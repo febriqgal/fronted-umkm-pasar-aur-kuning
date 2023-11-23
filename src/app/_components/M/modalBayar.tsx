@@ -8,11 +8,11 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
-import { appConfig, formatRupiah } from "@/constant/appConfig";
 import axios from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Order } from "../types/order";
+import { Order } from "../../_types/order";
+import { appConfig, formatRupiah } from "@/app/_constant/appConfig";
 
 export default function ModalBayar({ dataOrders }: { dataOrders: Order }) {
   interface IFormInput {

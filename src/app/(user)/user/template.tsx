@@ -6,16 +6,17 @@ import Logo from "../../../../public/logo.png";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { Button, Spinner } from "@nextui-org/react";
-const navigation = [
-  { name: "Dashboard", href: "/user" },
-  { name: "Riwayat Pembelian", href: "/user/riwayat-pembelian" },
-];
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function AdminPage({ children }: { children: React.ReactNode }) {
+  const navigation = [
+    { name: "Riwayat Pembelian", href: "/user/riwayat-pembelian" },
+    { name: "Kelola Akun", href: "/user/kelola-akun" },
+    { name: "Keluar", href: "/" },
+  ];
   const pathname = usePathname();
   const { data: session, status } = useSession();
 

@@ -1,11 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { appConfig, formatRupiah } from "@/constant/appConfig";
-import {
-  useDeleteOrdersMutation,
-  useGetByidOrdersApiQuery,
-} from "@/redux/feature/ordersSlice";
+
 import {
   Button,
   Table,
@@ -21,13 +17,17 @@ import Link from "next/link";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
-import ModalBayar from "@/app/(main)/riwayat/components/modalBayar";
-import { Order } from "@/app/(main)/riwayat/types/order";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useGetByidOrdersApiQuery } from "@/app/_redux/feature/ordersSlice";
+import { appConfig, formatRupiah } from "@/app/_constant/appConfig";
+import ModalBayar from "@/app/_components/M/modalBayar";
+import { Order } from "@/app/_types/order";
 export default function RiwayatPage() {
   dayjs.locale("id");
   dayjs.extend(relativeTime);
   const { data: session } = useSession();
-  const [deleteOrder] = useDeleteOrdersMutation();
+
   const { data: dataOrders } = useGetByidOrdersApiQuery(session?.user?.id, {
     refetchOnMountOrArgChange: true,
   });
@@ -35,10 +35,14 @@ export default function RiwayatPage() {
 
   return (
     <div className="flex min-h-screen">
-      <Table aria-label="Example static collection table">
+      <Table
+        selectionMode="single"
+        color="primary"
+        aria-label="Example static collection table"
+      >
         <TableHeader>
           <TableColumn>No.</TableColumn>
-          <TableColumn>Nama Produk</TableColumn>
+          <TableColumn>NAME</TableColumn>
           <TableColumn>Catatan</TableColumn>
           <TableColumn>QTY</TableColumn>
           <TableColumn>TOTAL</TableColumn>
@@ -68,7 +72,7 @@ export default function RiwayatPage() {
                 <TableCell>{formatRupiah(e.cart.total)}</TableCell>
                 <TableCell>{e.user.address}</TableCell>
                 <TableCell>{e.status}</TableCell>
-                <TableCell className="text-center">
+                <TableCell>
                   {e.payment ? (
                     <Button
                       color="primary"
@@ -77,9 +81,7 @@ export default function RiwayatPage() {
                     >
                       Lihat
                     </Button>
-                  ) : (
-                    "-"
-                  )}
+                  ) : null}
                 </TableCell>
                 <TableCell
                   title={dayjs(e.created_at).format("hh:mm - DD MMM YYYY")}
@@ -88,9 +90,23 @@ export default function RiwayatPage() {
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center justify-center gap-2">
-                    <ModalBayar dataOrders={e} />
-                    {e.status === "success" ? (
-                      <Button onPress={() => deleteOrder(e.id)}>Hapus</Button>
+                    {e.status !== "delivered" && e.status !== "success" ? (
+                      <ModalBayar dataOrders={e} />
+                    ) : null}
+                    {e.status === "delivered" ? (
+                      <Button
+                        onPress={async () => {
+                          await axios.patch(
+                            `${appConfig.appApiUrl}/orders/${e.id}`,
+                            {
+                              status: "success",
+                            }
+                          );
+                          toast.success("Berhasil mengubah status");
+                        }}
+                      >
+                        Barang Diterima
+                      </Button>
                     ) : null}
                   </div>
                 </TableCell>

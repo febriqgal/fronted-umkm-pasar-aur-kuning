@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import { Providers } from "../providers";
-import { appConfig } from "@/constant/appConfig";
-import NavbarComponent from "./_components/navbar";
-import FooterComponent from "./_components/footer";
+
+import NavbarComponent from "../_components/M/navbarMain";
+import FooterComponent from "../_components/M/footer";
 import { Toaster } from "react-hot-toast";
+import { appConfig } from "../_constant/appConfig";
 
 const inter = Inter({ subsets: ["latin"] });
 

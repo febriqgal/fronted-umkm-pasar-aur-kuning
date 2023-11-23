@@ -1,5 +1,5 @@
-import { useGetCategoryApiQuery } from "@/redux/feature/categorysSlice";
-import { Product } from "@/types/products";
+import { useGetCategoryApiQuery } from "@/app/_redux/feature/categorysSlice";
+import { Product } from "@/app/_types/products";
 import {
   Button,
   Input,

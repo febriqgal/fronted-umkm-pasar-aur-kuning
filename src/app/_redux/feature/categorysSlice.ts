@@ -1,4 +1,4 @@
-import { appConfig } from "@/constant/appConfig";
+import { appConfig } from "@/app/_constant/appConfig";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiCategory = createApi({
