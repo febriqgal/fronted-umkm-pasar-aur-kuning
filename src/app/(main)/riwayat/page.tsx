@@ -22,11 +22,13 @@ import { Order } from "./types/order";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
+import axios from "axios";
+import toast from "react-hot-toast";
 export default function RiwayatPage() {
   dayjs.locale("id");
   dayjs.extend(relativeTime);
   const { data: session } = useSession();
-  const [deleteOrder] = useDeleteOrdersMutation();
+
   const { data: dataOrders } = useGetByidOrdersApiQuery(session?.user?.id, {
     refetchOnMountOrArgChange: true,
   });
@@ -85,9 +87,23 @@ export default function RiwayatPage() {
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center justify-center gap-2">
-                    <ModalBayar dataOrders={e} />
-                    {e.status === "success" ? (
-                      <Button onPress={() => deleteOrder(e.id)}>Hapus</Button>
+                    {e.status !== "delivered" && e.status !== "success" ? (
+                      <ModalBayar dataOrders={e} />
+                    ) : null}
+                    {e.status === "delivered" ? (
+                      <Button
+                        onPress={async () => {
+                          await axios.patch(
+                            `${appConfig.appApiUrl}/orders/${e.id}`,
+                            {
+                              status: "success",
+                            }
+                          );
+                          toast.success("Berhasil mengubah status");
+                        }}
+                      >
+                        Barang Diterima
+                      </Button>
                     ) : null}
                   </div>
                 </TableCell>

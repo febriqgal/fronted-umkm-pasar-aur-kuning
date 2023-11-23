@@ -13,10 +13,5 @@ export default function UmkmPage() {
       </div>
     );
   }
-  return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div>wqqwqw</div>
-      <h1>qwqw</h1>
-    </div>
-  );
+  return <div className="flex justify-center items-center min-h-screen"></div>;
 }

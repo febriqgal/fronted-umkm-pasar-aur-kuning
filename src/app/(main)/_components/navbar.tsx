@@ -59,7 +59,7 @@ export default function NavbarComponent() {
                     Riwayat Pembelian
                   </DropdownItem>
                   {session.user?.role === "umkm" ? (
-                    <DropdownItem as={Link} href={"/umkm"}>
+                    <DropdownItem as={Link} href={"/umkm/kelola-produk"}>
                       Dashboard UMKM
                     </DropdownItem>
                   ) : (

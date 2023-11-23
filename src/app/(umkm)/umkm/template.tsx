@@ -1,11 +1,24 @@
 "use client";
-import React from "react";
-import NavbarUMKMComponents from "../_components/navbar";
-import { useSession } from "next-auth/react";
 import { Button, Spinner } from "@nextui-org/react";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React from "react";
 
+import Logo from "../../../../public/logo.png";
 export default function Template({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const navigation = [
+    { name: "Kelola Produk", href: "/umkm/kelola-produk" },
+    { name: "Kelola Pembelian", href: "/umkm/kelola-pembelian" },
+    { name: "Tambah Produk", href: "/umkm/tambah-produk" },
+    { name: "Keluar", href: "/" },
+  ];
+  function classNames(...classes: any) {
+    return classes.filter(Boolean).join(" ");
+  }
+
   const { data: session, status } = useSession();
   if (status === "loading") {
     return (
@@ -16,9 +29,46 @@ export default function Template({ children }: { children: React.ReactNode }) {
   }
   if (session?.user.role === "umkm") {
     return (
-      <div className="flex">
-        <NavbarUMKMComponents />
-        <main className="w-full">{children}</main>
+      <div>
+        <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
+          <div className="flex-1 flex flex-col min-h-0 bg-primary">
+            <div className="flex gap-4 justify-center items-center h-16 flex-shrink-0 px-4 bg-primary">
+              <Image className="h-8 w-auto" src={Logo} alt="Workflow" />
+              <h1 className="text-white">Dashboard Toko</h1>
+            </div>
+            <div className="flex-1 flex flex-col overflow-y-auto">
+              <nav className="flex-1 px-2 py-4 space-y-1">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={classNames(
+                      pathname === item.href
+                        ? "bg-white text-black"
+                        : "text-gray-300 hover:bg-white hover:text-black",
+                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                    )}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div className="md:pl-64 flex flex-col">
+          <main className="flex-1">
+            <div className="py-6">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                {/* Replace with your content */}
+                <div className="py-4">
+                  <div className="rounded-lg">{children}</div>
+                </div>
+                {/* /End replace */}
+              </div>
+            </div>
+          </main>
+        </div>
       </div>
     );
   }

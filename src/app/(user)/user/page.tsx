@@ -34,7 +34,7 @@ export default function UserPage() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
         <Input
           type="text"
-          label="Name"
+          label="Nama"
           defaultValue={dataUser?.data?.name}
           {...register("name")}
         />
@@ -47,13 +47,13 @@ export default function UserPage() {
         />
         <Input
           type="number"
-          label="Phone"
+          label="No. Hp"
           defaultValue={dataUser?.data?.phone}
           {...register("phone")}
         />
         <Input
           type="text"
-          label="Address"
+          label="Alamat"
           defaultValue={dataUser?.data?.address}
           {...register("address")}
         />

@@ -29,8 +29,7 @@ export default function KelolaProdukPage() {
   console.log(dataProduct?.data);
 
   return (
-    <div className="w-full py-10 px-20">
-      <ModalAddProduct />
+    <div className="w-full">
       <Table
         color="primary"
         className="w-full "

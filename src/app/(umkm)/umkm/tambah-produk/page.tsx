@@ -1,11 +1,11 @@
 "use client";
-import { useGetCategoryApiQuery } from "@/redux/feature/categorysSlice";
 import { usePostProductsMutation } from "@/redux/feature/productsSlice";
-import { Button, Input, Select, SelectItem } from "@nextui-org/react";
+import { Button, Input, Textarea } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+
 export interface Root {
   id: string;
   user_id: string;
@@ -33,6 +33,12 @@ export interface User {
   updated_at: string;
 }
 export default function TambahProdukPage() {
+  const initialValue = [
+    {
+      type: "paragraph",
+      children: [{ text: "A line of text in a paragraph." }],
+    },
+  ];
   const [loading, setLoading] = React.useState(false);
   const { data: session } = useSession();
   const { register, handleSubmit } = useForm<Root>();
@@ -59,6 +65,7 @@ export default function TambahProdukPage() {
       stock: data.stock,
       discount: data.discount,
     }).then((res: any) => {
+      console.log(res);
       setLoading(false);
       toast.success("Berhasil menambahkan produk baru");
     });
@@ -73,7 +80,7 @@ export default function TambahProdukPage() {
           size="sm"
           {...register("title", { required: true })}
         />
-        <Input
+        <Textarea
           color="primary"
           variant="bordered"
           size="sm"

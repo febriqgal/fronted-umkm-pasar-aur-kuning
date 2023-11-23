@@ -11,6 +11,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@lexical/react": "^0.12.4",
     "@nextui-org/react": "^2.2.9",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.1",
@@ -18,8 +19,8 @@
     "framer-motion": "^10.16.4",
     "next": "14.0.2",
     "next-auth": "^4.24.5",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",

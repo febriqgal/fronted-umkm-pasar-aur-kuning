@@ -35,8 +35,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const data = dataProduct?.data;
   console.log(data);
   useEffect(() => {
-    setPrice(dataProduct?.data.price);
-  }, [dataProduct?.data.price]);
+    setPrice(dataProduct?.data.total);
+  }, [dataProduct?.data.total]);
 
   if (isLoading) {
     return (
@@ -84,7 +84,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                   <h1 className=" ">{`Tersisa ${data.stock}`}</h1>
                   <div className="mt-3">
                     <div className="text-3xl font-bold">
-                      {formatRupiah(data?.price)}
+                      {formatRupiah(data?.total)}
                     </div>
                   </div>
                   <div className="mt-3">
@@ -113,7 +113,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                       count <= 1 ? null : setCounter(count - 1);
                       count <= 1
                         ? null
-                        : setPrice(Number(price) - Number(data?.price));
+                        : setPrice(Number(price) - Number(data?.total));
                     }}
                     color="primary"
                     variant="light"
@@ -129,7 +129,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                         return toast.error("Stok hanya sisa " + data?.stock);
                       }
                       setCounter(count + 1);
-                      setPrice(Number(price) + Number(data?.price));
+                      setPrice(Number(price) + Number(data?.total));
                     }}
                     color="primary"
                     size="sm"
