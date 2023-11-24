@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-
 import { Spinner } from "@nextui-org/react";
 import Header from "../../../public/headerr.jpg";
 import Link from "next/link";
@@ -21,11 +20,7 @@ export default function Home() {
   }
   return (
     <div className="space-y-5 pt-20 min-h-screen">
-      <div className="w-full h-[300px] rounded-xl  bg-primary">
-        <div className=" flex justify-center rounded-xl overflow-clip items-center ">
-          <Image src={Header} alt="Header" />
-        </div>
-      </div>
+      <Image src={Header} alt="Header" className="rounded-xl" />
       <div className="grid grid-cols-6 gap-4">
         {dataProduct?.data.map((e: any) => {
           return (
