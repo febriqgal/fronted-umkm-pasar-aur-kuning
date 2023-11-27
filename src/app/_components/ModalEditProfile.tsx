@@ -10,7 +10,7 @@ import {
   useDisclosure,
   Input,
 } from "@nextui-org/react";
-import { User } from "../../_types/cart";
+import { User } from "../_types/cart";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSession } from "next-auth/react";
 import axios from "axios";

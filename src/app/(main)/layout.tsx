@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import { Providers } from "../providers";
 
-import NavbarComponent from "../_components/M/navbarMain";
-import FooterComponent from "../_components/M/footer";
+import NavbarComponent from "../_components/NavbarMain";
+import FooterComponent from "../_components/Footer";
 import { Toaster } from "react-hot-toast";
 import { appConfig } from "../_constant/appConfig";
 

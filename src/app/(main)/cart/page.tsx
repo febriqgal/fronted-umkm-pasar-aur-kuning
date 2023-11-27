@@ -1,30 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import {
-  Button,
-  Checkbox,
-  CheckboxGroup,
-  Input,
-  Select,
-  SelectItem,
-  cn,
-} from "@nextui-org/react";
-import { useSession } from "next-auth/react";
-import React, { SyntheticEvent, use, useState } from "react";
-import StickyBox from "react-sticky-box";
-import { Carts } from "../../_types/cart";
-import axios from "axios";
-import toast from "react-hot-toast";
-import ModalEditProfile from "../../_components/M/modalEditProfile";
-import Link from "next/link";
-import { useGetUserByIdApiQuery } from "@/app/_redux/feature/usersSlice";
 import { appConfig, formatRupiah } from "@/app/_constant/appConfig";
 import {
   useDeleteCartsMutation,
   useGetByUserIdCartsApiQuery,
   useGetByidCartsApiQuery,
 } from "@/app/_redux/feature/cartsSlice";
+import { useGetUserByIdApiQuery } from "@/app/_redux/feature/usersSlice";
+import {
+  Button,
+  Checkbox,
+  CheckboxGroup,
+  Select,
+  SelectItem,
+  cn,
+} from "@nextui-org/react";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import React, { SyntheticEvent, useState } from "react";
+import toast from "react-hot-toast";
+import StickyBox from "react-sticky-box";
+import { Carts } from "../../_types/cart";
 
 export default function CartPage() {
   const dataOngkir = [
@@ -41,7 +39,7 @@ export default function CartPage() {
       value: 60000,
     },
   ];
-  const [isSelected, setIsSelected] = React.useState(false);
+
   const [ongkir, setOngkir]: any = React.useState(0);
   const [disable, setDisable] = useState(false);
   const [groupSelected, setGroupSelected]: any = React.useState<Carts[]>([]);
@@ -53,36 +51,33 @@ export default function CartPage() {
     refetchOnMountOrArgChange: true,
   });
   const [deleteCarts] = useDeleteCartsMutation();
-  console.log(dataUsers);
-  console.log(groupSelected[0]);
+
   const { data: dataCartSelected } = useGetByidCartsApiQuery(groupSelected[0], {
     refetchOnMountOrArgChange: true,
   });
-  console.log(dataCartSelected?.data);
-  console.log(ongkir.anchorKey);
 
   const handleNewOrders = async (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log(e);
-    await axios
-      .post(`${appConfig.appApiUrl}/orders`, {
-        user_id: `${dataUsers?.data?.id}`,
-        product_id: `${dataCartSelected?.data.product_id}`,
-        cart_id: `${dataCartSelected?.data.id}`,
-        status: "pending",
-        total:
-          Number(dataCartSelected?.data?.total ?? 0) +
-          Number(ongkir.anchorKey ?? 0),
-      })
-      .then((res) => {
-        console.log(res);
-      });
+    if (groupSelected.length === 0) {
+      toast.error("Pilih produk terlebih dahulu");
+    } else {
+      setDisable(true);
+      await axios
+        .post(`${appConfig.appApiUrl}/orders`, {
+          user_id: `${dataUsers?.data?.id}`,
+          product_id: `${dataCartSelected?.data?.product_id}`,
+          cart_id: `${dataCartSelected?.data.id}`,
+          status: "pending",
+          total:
+            Number(dataCartSelected?.data?.total ?? 0) +
+            Number(ongkir.anchorKey ?? 0),
+        })
+        .then((res) => {});
 
-    // await deleteCarts(e.id);
-
-    toast.success("Berhasil checkout, silahkan lakukan pembayaran");
-    setDisable(false);
-    setGroupSelected([]);
+      toast.success("Berhasil checkout, silahkan lakukan pembayaran");
+      setDisable(false);
+      setGroupSelected([]);
+    }
   };
 
   return (
@@ -115,9 +110,6 @@ export default function CartPage() {
             className="w-full"
           >
             {dataCart?.data?.map((e: Carts) => {
-              console.log(e);
-              console.log(isSelected);
-
               return (
                 <Checkbox
                   onChange={() => {
@@ -222,16 +214,7 @@ export default function CartPage() {
                 </div>
               </div>
             </div>
-            <Button
-              onPress={() => {
-                groupSelected.length === 0
-                  ? toast.error("Pilih produk terlebih dahulu")
-                  : null;
-              }}
-              fullWidth
-              type="submit"
-              color="primary"
-            >
+            <Button fullWidth type="submit" color="primary">
               Checkout
             </Button>
           </StickyBox>

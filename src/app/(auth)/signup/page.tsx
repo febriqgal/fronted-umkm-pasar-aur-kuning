@@ -29,7 +29,6 @@ export default function SignupPage() {
       address: data.address,
       role: "user",
     }).then((res: any) => {
-      console.log(res);
       if (res?.error?.status === 422) {
         setLoading(false);
         toast.error("Akun sudah terdaftar, silahkan login.");

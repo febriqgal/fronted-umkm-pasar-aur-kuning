@@ -13,19 +13,17 @@ import {
 } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import ModalDeleteProduct from "../../../_components/M/modalDeleteProduct";
-import ModalEditProduct from "../../../_components/M/modalEditProduct";
+import ModalDeleteProduct from "../../../_components/ModalDeleteProduct";
+import ModalEditProduct from "../../../_components/ModalEditProduct";
 
 export default function KelolaProdukPage() {
   const { data: session } = useSession();
-  console.log(session?.user?.id);
   const { data: dataProduct } = useGetByUserIdProductsApiQuery(
     `${session?.user?.id}`,
     {
       refetchOnMountOrArgChange: true,
     }
   );
-  console.log(dataProduct?.data);
 
   return (
     <div className="w-full">

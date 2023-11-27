@@ -11,7 +11,7 @@ export async function POST(req: Request) {
   const buffer = Buffer.from(byteData);
 
   const path = `./public/product/${file.name}`;
-  console.log(path);
+
   await writeFile(path, buffer);
   return NextResponse.json({ message: "Success" });
 }

@@ -16,7 +16,6 @@ export default function LoginPage() {
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const res = await axios.get(`${appConfig.appApiUrl}/users/${data.email}`);
 
-    console.log(res);
     if (
       res?.data?.data === null ||
       res.data?.data?.password !== data.password

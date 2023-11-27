@@ -13,7 +13,7 @@ import {
 } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import ModalBayar from "../../_components/M/modalBayar";
+import ModalBayar from "../../_components/ModalBayar";
 import { Order } from "../../_types/order";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
@@ -30,7 +30,6 @@ export default function RiwayatPage() {
   const { data: dataOrders } = useGetByidOrdersApiQuery(session?.user?.id, {
     refetchOnMountOrArgChange: true,
   });
-  console.log(dataOrders?.data);
 
   return (
     <div className="flex  mt-20  min-h-screen">
@@ -53,7 +52,6 @@ export default function RiwayatPage() {
         </TableHeader>
         <TableBody>
           {dataOrders?.data?.map((e: Order, i: number) => {
-            console.log(e);
             return (
               <TableRow key={e.id}>
                 <TableCell>{i + 1}.</TableCell>

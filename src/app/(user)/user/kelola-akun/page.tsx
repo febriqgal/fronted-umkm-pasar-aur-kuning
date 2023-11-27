@@ -9,7 +9,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 export default function KelolaAkunPage() {
   const { data: session } = useSession();
-  console.log(session?.user.id);
 
   const { data: dataUser, isLoading } = useGetUserByIdApiQuery(
     session?.user.email
@@ -18,9 +17,7 @@ export default function KelolaAkunPage() {
   const onSubmit: SubmitHandler<User> = async (data) => {
     await axios
       .patch(`http://127.0.0.1:8000/api/users/${session?.user.id}`, data)
-      .then((res) => {
-        console.log(res);
-      });
+      .then((res) => {});
   };
   if (isLoading) {
     return (

@@ -20,7 +20,6 @@ import { usePostCartsMutation } from "@/app/_redux/feature/cartsSlice";
 
 export default function ProductPage({ params }: { params: { id: string } }) {
   const { data: sesssion } = useSession();
-  console.log(sesssion?.user.id);
   const [note, setNote] = useState("");
   const [newCart] = usePostCartsMutation();
   const { data: dataProduct, isLoading } = useGetByidProductsApiQuery(
@@ -29,11 +28,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const [price, setPrice] = useState(0);
   const [count, setCounter] = useState(1);
 
-  console.log(count);
-  console.log(price);
-
   const data = dataProduct?.data;
-  console.log(data);
   useEffect(() => {
     setPrice(dataProduct?.data.total);
   }, [dataProduct?.data.total]);
@@ -57,9 +52,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
       product_id: `${data?.id}`,
       quantity: Number(count),
       total: Number(price),
-    }).then((res: any) => {
-      console.log(res);
-    });
+    }).then((res: any) => {});
     toast.success("Berhasil ditambahkan ke keranjang");
   };
 

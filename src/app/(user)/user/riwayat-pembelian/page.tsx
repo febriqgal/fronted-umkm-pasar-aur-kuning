@@ -21,7 +21,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useGetByidOrdersApiQuery } from "@/app/_redux/feature/ordersSlice";
 import { appConfig, formatRupiah } from "@/app/_constant/appConfig";
-import ModalBayar from "@/app/_components/M/modalBayar";
+import ModalBayar from "@/app/_components/ModalBayar";
 import { Order } from "@/app/_types/order";
 export default function RiwayatPage() {
   dayjs.locale("id");
@@ -31,7 +31,6 @@ export default function RiwayatPage() {
   const { data: dataOrders } = useGetByidOrdersApiQuery(session?.user?.id, {
     refetchOnMountOrArgChange: true,
   });
-  console.log(dataOrders?.data);
 
   return (
     <div className="flex min-h-screen">
@@ -54,7 +53,6 @@ export default function RiwayatPage() {
         </TableHeader>
         <TableBody>
           {dataOrders?.data?.map((e: Order, i: number) => {
-            console.log(e);
             return (
               <TableRow key={e.id}>
                 <TableCell>{i + 1}.</TableCell>

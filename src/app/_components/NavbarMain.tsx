@@ -12,19 +12,19 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-  Input,
   Skeleton,
 } from "@nextui-org/react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { HiShoppingCart } from "react-icons/hi2";
-import TestIcon from "../icons/testIcon";
+import TestIcon from "./icons/testIcon";
 export default function NavbarMainComponent() {
   const route = useRouter();
   const { data: session, status } = useSession();
-  const { data: dataProduct } = useGetProductsApiQuery({});
-  console.log(dataProduct?.data);
+  const { data: dataProduct } = useGetProductsApiQuery({
+    refetchOnMountOrArgChange: true,
+  });
 
   const { data: dataProductByUserId } = useGetByUserIdCartsApiQuery(
     `${session?.user?.id}`,
@@ -32,7 +32,6 @@ export default function NavbarMainComponent() {
       refetchOnMountOrArgChange: true,
     }
   );
-  console.log(dataProductByUserId?.data);
 
   return (
     <div className="flex fixed w-full z-30 justify-between items-center px-20 gap-4 py-4 border-b-2 bg-white text-white">
@@ -73,7 +72,7 @@ export default function NavbarMainComponent() {
             {session ? (
               <Dropdown>
                 <DropdownTrigger>
-                  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+                  <Avatar color="primary" />
                 </DropdownTrigger>
                 <DropdownMenu aria-label="Static Actions">
                   <DropdownItem isReadOnly className="text-center">

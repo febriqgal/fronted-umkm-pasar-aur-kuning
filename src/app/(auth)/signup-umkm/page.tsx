@@ -24,7 +24,7 @@ export default function SignupUMKMPage() {
     const findUser = await axios.get(
       `${appConfig.appApiUrl}/users/${data.email}`
     );
-    console.log(findUser);
+
     if (findUser.data.data) {
       toast.error("Akun sudah terdaftar, silahkan login");
       setLoading(false);

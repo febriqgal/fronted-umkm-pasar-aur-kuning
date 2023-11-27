@@ -46,8 +46,6 @@ export default function TambahProdukPage() {
       method: "POST",
       body: dataa,
     });
-    console.log(result);
-    console.log(file);
     setLoading(true);
     await newDataProduct({
       user_id: session?.user?.id,
@@ -58,7 +56,6 @@ export default function TambahProdukPage() {
       stock: data.stock,
       discount: data.discount,
     }).then((res: any) => {
-      console.log(res);
       setLoading(false);
       toast.success("Berhasil menambahkan produk baru");
     });

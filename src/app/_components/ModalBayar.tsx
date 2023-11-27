@@ -11,10 +11,12 @@ import {
 import axios from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Order } from "../../_types/order";
+import { Order } from "../_types/order";
 import { appConfig, formatRupiah } from "@/app/_constant/appConfig";
 
-export default function ModalBayar({ dataOrders }: { dataOrders: Order }) {
+export default function ModalBayar({
+  dataOrders,
+}: Readonly<{ dataOrders: Order }>) {
   interface IFormInput {
     payment: string;
   }
@@ -24,12 +26,11 @@ export default function ModalBayar({ dataOrders }: { dataOrders: Order }) {
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     const dataa = new FormData();
     dataa.set("file", file!);
-    const result = await fetch("/api/upload", {
+    await fetch("/api/upload", {
       method: "POST",
       body: dataa,
     });
-    console.log(result);
-    console.log(file);
+
     await axios
       .patch(`${appConfig.appApiUrl}/orders/${dataOrders.id}`, {
         payment: file?.name,
@@ -52,13 +53,13 @@ export default function ModalBayar({ dataOrders }: { dataOrders: Order }) {
                 Pembayaran
               </ModalHeader>
               <ModalBody>
-                <p>
+                <h1>
                   Silahkan melakukan pembayaran senilai
                   <span className="font-bold">
                     {` ${formatRupiah(dataOrders.total)}`}
-                  </span>{" "}
+                  </span>
                   ke rekening berikut:
-                </p>
+                </h1>
                 <p>
                   <b>Bank BNI</b> : 1234567890
                 </p>

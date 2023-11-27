@@ -15,11 +15,8 @@ const handler = NextAuth({
         const res = await axios.get(
           `${appConfig.appApiUrl}/users/${credentials?.email}`
         );
-        console.log(res);
-        console.log(credentials);
 
         const user = res.data.data;
-        console.log(user);
 
         if (user) {
           return user;

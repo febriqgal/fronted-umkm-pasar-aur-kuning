@@ -34,7 +34,6 @@ export default function RiwayatPage() {
   const { data: dataOrders } = useGetByidOrdersApiQuery(session?.user?.id, {
     refetchOnMountOrArgChange: true,
   });
-  console.log(dataOrders?.data);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -53,7 +52,6 @@ export default function RiwayatPage() {
         </TableHeader>
         <TableBody>
           {dataOrders?.data?.map((e: Order, i: number) => {
-            console.log(e);
             return (
               <TableRow key={e.id}>
                 <TableCell>{i + 1}.</TableCell>

@@ -20,11 +20,10 @@ export default function Pdf() {
   const { data: dataOrders } = useGetByidOrdersApiQuery(session?.user?.id, {
     refetchOnMountOrArgChange: true,
   });
-  console.log(dataOrders?.data);
+
   const { data: dataStatusOrder } = useGetByStatusOrdersApiQuery("success", {
     refetchOnMountOrArgChange: true,
   });
-  console.log(dataStatusOrder?.data);
 
   const styles = StyleSheet.create({
     table: {
@@ -93,7 +92,7 @@ export default function Pdf() {
             </View>
             {dataStatusOrder?.data.map((e: Order, i: any) => {
               const res = e;
-              console.log(res.total);
+
               return (
                 <View key={i} style={styles.tableRow}>
                   <View
