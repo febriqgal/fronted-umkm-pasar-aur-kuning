@@ -25,6 +25,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import Pdf from "./cetak";
 export default function RiwayatPage() {
   dayjs.locale("id");
   dayjs.extend(relativeTime);
@@ -36,7 +37,7 @@ export default function RiwayatPage() {
   console.log(dataOrders?.data);
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex flex-col min-h-screen">
       <Table aria-label="Example static collection table">
         <TableHeader>
           <TableColumn>No.</TableColumn>
@@ -67,7 +68,7 @@ export default function RiwayatPage() {
                 </TableCell>
                 <TableCell>{e.cart.note}</TableCell>
                 <TableCell>{e.cart.quantity}</TableCell>
-                <TableCell>{formatRupiah(e.cart.total)}</TableCell>
+                <TableCell>{formatRupiah(e.total)}</TableCell>
                 <TableCell>{e.user.address}</TableCell>
                 <TableCell>{e.status}</TableCell>
                 <TableCell className="text-center">
@@ -158,6 +159,7 @@ export default function RiwayatPage() {
           })}
         </TableBody>
       </Table>
+      <Pdf />
     </div>
   );
 }

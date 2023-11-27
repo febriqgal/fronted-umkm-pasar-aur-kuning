@@ -68,7 +68,7 @@ export default function RiwayatPage() {
                 </TableCell>
                 <TableCell>{e.cart.note}</TableCell>
                 <TableCell>{e.cart.quantity}</TableCell>
-                <TableCell>{formatRupiah(e.cart.total)}</TableCell>
+                <TableCell>{formatRupiah(e.total)}</TableCell>
                 <TableCell>{e.user.address}</TableCell>
                 <TableCell>{e.status}</TableCell>
                 <TableCell>

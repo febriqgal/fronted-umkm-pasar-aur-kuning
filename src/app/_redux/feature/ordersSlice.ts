@@ -17,6 +17,10 @@ export const apiOrders = createApi({
       query: (id) => `Orders/${id}`.toLowerCase(),
       providesTags: ["Orders"],
     }),
+    getByStatusOrdersApi: builder.query({
+      query: (id) => `Orders/status/${id}`.toLowerCase(),
+      providesTags: ["Orders"],
+    }),
     getByUserIdOrdersApi: builder.query({
       query: (ide) => `Orders/user/${ide}`.toLowerCase(),
 
@@ -50,6 +54,7 @@ export const apiOrders = createApi({
 
 export const {
   useGetOrdersApiQuery,
+  useGetByStatusOrdersApiQuery,
   usePostOrdersMutation,
   useGetByidOrdersApiQuery,
   useGetByUserIdOrdersApiQuery,

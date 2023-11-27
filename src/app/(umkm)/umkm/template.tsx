@@ -10,7 +10,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const navigation = [
     { name: "Kelola Produk", href: "/umkm/kelola-produk" },
-    { name: "Kelola Pembelian", href: "/umkm/kelola-pembelian" },
+    { name: "Kelola Penjualan", href: "/umkm/kelola-penjualan" },
     { name: "Tambah Produk", href: "/umkm/tambah-produk" },
     { name: "Keluar", href: "/" },
   ];

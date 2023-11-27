@@ -59,6 +59,7 @@ export default function CartPage() {
     refetchOnMountOrArgChange: true,
   });
   console.log(dataCartSelected?.data);
+  console.log(ongkir.anchorKey);
 
   const handleNewOrders = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -70,9 +71,8 @@ export default function CartPage() {
         cart_id: `${dataCartSelected?.data.id}`,
         status: "pending",
         total:
-          Number(dataCartSelected?.data.total) + Number(ongkir.anchorKey)
-            ? Number(dataCartSelected?.data.total) + Number(ongkir.anchorKey)
-            : Number(dataCartSelected?.data.total),
+          Number(dataCartSelected?.data?.total ?? 0) +
+          Number(ongkir.anchorKey ?? 0),
       })
       .then((res) => {
         console.log(res);
@@ -215,14 +215,9 @@ export default function CartPage() {
                   <h1>Total</h1>
                   <h1 className="">
                     {formatRupiah(
-                      dataCartSelected?.data?.total ??
-                        0 + Number(ongkir.anchorKey ?? 0)
-                    )
-                      ? formatRupiah(
-                          dataCartSelected?.data?.total ??
-                            0 + Number(ongkir.anchorKey ?? 0)
-                        )
-                      : formatRupiah(dataCartSelected?.data?.total ?? 0)}
+                      Number(dataCartSelected?.data?.total ?? 0) +
+                        Number(ongkir.anchorKey ?? 0)
+                    )}
                   </h1>
                 </div>
               </div>
