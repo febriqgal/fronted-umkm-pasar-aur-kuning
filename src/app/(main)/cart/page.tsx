@@ -52,9 +52,14 @@ export default function CartPage() {
   });
   const [deleteCarts] = useDeleteCartsMutation();
 
-  const { data: dataCartSelected } = useGetByidCartsApiQuery(groupSelected[0], {
-    refetchOnMountOrArgChange: true,
-  });
+  const { data: dataCartSelected } = useGetByidCartsApiQuery(
+    groupSelected[0] ?? "",
+    {
+      refetchOnMountOrArgChange: true,
+    }
+  );
+  console.log(dataCartSelected);
+  console.log(groupSelected[0]);
 
   const handleNewOrders = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -66,6 +71,7 @@ export default function CartPage() {
         .post(`${appConfig.appApiUrl}/orders`, {
           user_id: `${dataUsers?.data?.id}`,
           product_id: `${dataCartSelected?.data?.product_id}`,
+          id_toko: `${dataCartSelected?.data?.product?.user_id}`,
           cart_id: `${dataCartSelected?.data.id}`,
           status: "pending",
           total:

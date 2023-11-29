@@ -2,7 +2,10 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { appConfig, formatRupiah } from "@/app/_constant/appConfig";
-import { useGetByidOrdersApiQuery } from "@/app/_redux/feature/ordersSlice";
+import {
+  useGetByidOrdersApiQuery,
+  useGetByidTokoOrdersApiQuery,
+} from "@/app/_redux/feature/ordersSlice";
 import { Order } from "@/app/_types/order";
 
 import {
@@ -31,9 +34,10 @@ export default function RiwayatPage() {
   dayjs.extend(relativeTime);
   const { data: session } = useSession();
 
-  const { data: dataOrders } = useGetByidOrdersApiQuery(session?.user?.id, {
+  const { data: dataOrders } = useGetByidTokoOrdersApiQuery(session?.user?.id, {
     refetchOnMountOrArgChange: true,
   });
+  console.log(dataOrders);
 
   return (
     <div className="flex flex-col min-h-screen">
