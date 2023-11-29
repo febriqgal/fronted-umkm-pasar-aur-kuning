@@ -2,7 +2,7 @@ import { appConfig } from "@/app/_constant/appConfig";
 import axios from "axios";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-
+//api
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
